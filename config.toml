@@ -23,23 +23,35 @@ voice_response_to_text_message = false
 # ==============================================================================
 
 [stt]
-# Provider selection: "faster-whisper", "openai", or "google"
-provider = "openai"
+# Provider selection: "whisper" (recommended), "faster-whisper", "openai", or "google"
+provider = "whisper"
+
+# ----------------------------------------
+# whisper (OpenAI Whisper - Local, Reliable on Windows)
+# ----------------------------------------
+# The original OpenAI Whisper library - works reliably on all platforms
+# Install: pip install openai-whisper
+model = "tiny"             # tiny (39MB): fastest, good for voice messages
+                            # base (74MB): good balance
+                            # small (244MB): better accuracy
+                            # medium (769MB): high accuracy
+                            # large (1550MB): best accuracy
+# device = "cuda"          # Uncomment if you have GPU
 
 # ----------------------------------------
 # faster-whisper (Local, Free, Privacy-first)
 # ----------------------------------------
 # Recommended for privacy and offline use
 # Downloaded automatically from Hugging Face on first use
-model = "base"              # tiny, base, small, medium, large-v3
-                            # tiny (39MB): fastest, lower accuracy
-                            # base (74MB): good balance (recommended)
-                            # small (244MB): better accuracy
-                            # medium (769MB): high accuracy
-                            # large-v3 (1550MB): best accuracy
-device = "cpu"              # cpu, cuda (GPU requires CUDA-enabled PyTorch)
-compute_type = "int8"       # int8 (fastest), float16, float32 (best quality)
-                            # int8 recommended for CPU, float16 for GPU
+# model = "base"              # tiny, base, small, medium, large-v3
+#                             # tiny (39MB): fastest, lower accuracy
+#                             # base (74MB): good balance (recommended)
+#                             # small (244MB): better accuracy
+#                             # medium (769MB): high accuracy
+#                             # large-v3 (1550MB): best accuracy
+# device = "cpu"              # cpu, cuda (GPU requires CUDA-enabled PyTorch)
+# compute_type = "int8"       # int8 (fastest), float16, float32 (best quality)
+#                             # int8 recommended for CPU, float16 for GPU
 
 # ----------------------------------------
 # OpenAI Whisper (Cloud, Fast)
