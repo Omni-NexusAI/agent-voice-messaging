@@ -131,7 +131,11 @@ speed = 1.0                            # 0.5 to 2.0 (1.0 = normal speed)
 # ==============================================================================
 
 [audio]
-temp_dir = "/tmp/voice-messaging"     # Temporary directory for audio processing
+# temp_dir is auto-detected using Python's tempfile.gettempdir()
+# On Windows: C:\Users\<user>\AppData\Local\Temp\voice-messaging
+# On macOS/Linux: /tmp/voice-messaging
+# Uncomment below to override:
+# temp_dir = "/tmp/voice-messaging"
 sample_rate = 16000                    # Sample rate for STT (Whisper expects 16kHz)
 channels = 1                           # Audio channels (1 = mono)
 
