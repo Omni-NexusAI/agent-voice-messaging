@@ -20,7 +20,7 @@ class WhisperSTT(STTProvider):
             model: Model size (tiny, base, small, medium, large)
             device: Device to use (None for auto, 'cuda', 'cpu')
         """
-        # Fix Windows encoding issues
+        # Fix Windows encoding and OpenMP issues
         os.environ['PYTHONIOENCODING'] = 'utf-8'
         os.environ['KMP_DUPLICATE_LIB_OK'] = 'TRUE'
 
@@ -30,7 +30,11 @@ class WhisperSTT(STTProvider):
             raise ImportError("whisper not installed. Run: pip install openai-whisper")
 
         self.model_name = model
-        self.model = whisper.load_model(model, device=device)
+        # Only pass device if specified, otherwise let whisper auto-detect
+        if device:
+            self.model = whisper.load_model(model, device=device)
+        else:
+            self.model = whisper.load_model(model)
 
     def transcribe(self, audio_path: str) -> dict:
         """
